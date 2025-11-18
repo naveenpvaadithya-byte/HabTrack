@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HabTrack Login</title>
+
+<style>
+/* -------------------------------- */
+/* THEME VARIABLES */
+/* -------------------------------- */
+:root {
+    --accent: #00e6d0;
+
+    /* Light */
+    --bg1-light: #f7fbff;
+    --bg2-light: #eef6ff;
+    --text-light: #0d1a24;
+    --input-light: rgba(255,255,255,0.55);
+    --glass-light: rgba(255,255,255,0.35);
+
+    /* Dark */
+    --bg1-dark: #000;
+    --bg2-dark: #0a0a14;
+    --text-dark: #ffffff;
+    --input-dark: rgba(255,255,255,0.08);
+    --glass-dark: rgba(255,255,255,0.12);
+}
+
+/* Light Mode */
+body.light-mode {
+    --bg-main1: var(--bg1-light);
+    --bg-main2: var(--bg2-light);
+    --text-main: var(--text-light);
+    --input-bg: var(--input-light);
+    --glass-bg: var(--glass-light);
+}
+
+/* Dark Mode */
+body.dark-mode {
+    --bg-main1: var(--bg1-dark);
+    --bg-main2: var(--bg2-dark);
+    --text-main: var(--text-dark);
+    --input-bg: var(--input-dark);
+    --glass-bg: var(--glass-dark);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    transition: 0.25s ease;
+}
+
+/* -------------------------------- */
+/* BACKGROUND & CONTAINER */
+/* -------------------------------- */
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: radial-gradient(circle at 30% 20%, #7a2ca1, var(--bg-main1)),
+                radial-gradient(circle at 70% 80%, #1b1b56, var(--bg-main2));
+    color: var(--text-main);
+    overflow: hidden;
+}
+
+.container {
+    width: 90%;
+    max-width: 400px;
+    padding: 30px;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    background: var(--glass-bg);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+
+    animation: fadeInUp 0.6s ease;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* -------------------------------- */
+/* TITLE / LOGO */
+/* -------------------------------- */
+.logo {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 35px;
+}
+
+.logo span:nth-child(1) { color: #00e6d0; }
+.logo span:nth-child(2) { color: #83ffee; }
+
+/* -------------------------------- */
+/* INPUTS */
+/* -------------------------------- */
+.input-box {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.input-box label {
+    font-size: 14px;
+    opacity: 0.95;
+}
+
+.input-box input {
+    width: 100%;
+    padding: 14px;
+    margin-top: 6px;
+    border-radius: 10px;
+    border: none;
+    background: var(--input-bg);
+    backdrop-filter: blur(10px);
+    font-size: 16px;
+    color: var(--text-main);
+    outline: none;
+    box-shadow: 0 0 0px rgba(0,0,0,0);
+    transition: 0.3s ease;
+}
+
+.input-box input:focus {
+    box-shadow: 0 0 10px var(--accent);
+}
+
+/* -------------------------------- */
+/* PASSWORD EYE ICON */
+/* -------------------------------- */
+.eye-icon {
+    position: absolute;
+    right: 12px;
+    top: 43px;
+    cursor: pointer;
+    width: 23px;
+    filter: brightness(0.8);
+}
+
+.eye-icon:hover {
+    filter: brightness(1);
+}
+
+/* -------------------------------- */
+/* BUTTON */
+/* -------------------------------- */
+.btn {
+    width: 100%;
+    padding: 14px;
+    margin-top: 10px;
+    background: var(--accent);
+    color: black;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+
+    backdrop-filter: blur(10px);
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: scale(1.04);
+    box-shadow: 0 0 20px var(--accent);
+}
+
+/* -------------------------------- */
+/* REMEMBER / LINKS */
+/* -------------------------------- */
+.remember-center {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.bottom-links {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.bottom-links a {
+    color: #8fffee;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+/* -------------------------------- */
+/* DARK / LIGHT TOGGLE */
+/* -------------------------------- */
+#themeToggle {
+    position: fixed;
+    top: 18px;
+    right: 18px;
+    cursor: pointer;
+    font-size: 28px;
+    color: var(--text-main);
+}
+
+/* -------------------------------- */
+/* JS MESSAGE BOX */
+/* -------------------------------- */
+#jsBox {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    width: 260px;
+    padding: 14px;
+    border-left: 4px solid var(--accent);
+    background: rgba(0,0,0,0.75);
+    color: white;
+    border-radius: 12px;
+    display: none;
+    animation: slideUp 0.35s ease-out;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+#jsBoxClose {
+    float: right;
+    cursor: pointer;
+    font-weight: bold;
+    padding-left: 6px;
+}
+</style>
+</head>
+
+<body class="dark-mode">
+
+<!-- THEME TOGGLE -->
+<div id="themeToggle" onclick="toggleTheme()">🌙</div>
+
+<div class="container">
+
+    <div class="logo"><span>Hab</span><span>Track</span></div>
+
+    <!-- USERNAME -->
+    <div class="input-box">
+        <label>Username</label>
+        <input type="text" id="username" placeholder="Your username">
+    </div>
+
+    <!-- PASSWORD BOX -->
+    <div class="input-box">
+        <label>Password</label>
+        <input type="password" id="password" placeholder="****************">
+
+        <!-- EYE ICONS -->
+        <!-- OPEN EYE -->
+        <svg id="eyeOpen" class="eye-icon" onclick="togglePass()" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/>
+        </svg>
+
+        <!-- CLOSED EYE -->
+        <svg id="eyeClosed" class="eye-icon" onclick="togglePass()" style="display:none;" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
+            <path d="M17 13a5 5 0 01-10 0"/>
+            <path d="M2 12s4-7 10-7 10 7 10 7"/>
+            <line x1="22" y1="2" x2="2" y2="22"/>
+        </svg>
+    </div>
+
+    <!-- BUTTON -->
+    <button class="btn" onclick="login()">Start</button>
+
+    <!-- REMEMBER CENTER -->
+    <div class="remember-center">
+        <input type="checkbox" id="rememberMe">
+        <label for="rememberMe">Remember me</label>
+    </div>
+
+    <!-- FORGOT + SIGNUP -->
+    <div class="bottom-links">
+        <a href="#">Forgot password?</a>
+        <a href="signup.html">Sign up</a>
+    </div>
+</div>
+
+<!-- JS MESSAGE BOX -->
+<div id="jsBox">
+    <span id="jsBoxClose" onclick="closeBox()">✖</span>
+    <div id="jsMessage">Message here</div>
+</div>
+
+<script>
+/* -------------------------------- */
+/* DARK / LIGHT MODE */
+/* -------------------------------- */
+function toggleTheme() {
+    const body = document.body;
+    const icon = document.getElementById("themeToggle");
+
+    if (body.classList.contains("dark-mode")) {
+        body.classList.replace("dark-mode", "light-mode");
+        icon.textContent = "☀️";
+        localStorage.setItem("theme","light");
+    } else {
+        body.classList.replace("light-mode","dark-mode");
+        icon.textContent = "🌙";
+        localStorage.setItem("theme","dark");
+    }
+}
+
+(function(){
+    let saved = localStorage.getItem("theme");
+    if(saved === "light"){
+        document.body.classList.replace("dark-mode","light-mode");
+        document.getElementById("themeToggle").textContent="☀️";
+    }
+})();
+
+/* -------------------------------- */
+/* EYE ICON TOGGLE */
+/* -------------------------------- */
+function togglePass() {
+    let field = document.getElementById("password");
+    let open = document.getElementById("eyeOpen");
+    let closed = document.getElementById("eyeClosed");
+
+    if (field.type === "password") {
+        field.type = "text";
+        open.style.display = "none";
+        closed.style.display = "block";
+    } else {
+        field.type = "password";
+        closed.style.display = "none";
+        open.style.display = "block";
+    }
+}
+
+/* -------------------------------- */
+/* JS MESSAGE BOX */
+/* -------------------------------- */
+function showBox(msg){
+    const box = document.getElementById("jsBox");
+    document.getElementById("jsMessage").textContent = msg;
+    box.style.display = "block";
+
+    setTimeout(()=> box.style.display = "none", 4000);
+}
+
+function closeBox(){
+    document.getElementById("jsBox").style.display = "none";
+}
+
+/* -------------------------------- */
+/* LOGIN FUNCTION */
+/* -------------------------------- */
+function login(){
+    let user = document.getElementById("username").value;
+    let pass = document.getElementById("password").value;
+
+    if(!user){
+        showBox("⚠ Enter username");
+        return;
+    }
+    if(pass === "12345"){
+        showBox("✔ Login successful!");
+    } else {
+        showBox("❌ Incorrect password!");
+    }
+}
+</script>
+
+</body>
+</html>

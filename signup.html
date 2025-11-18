@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HabTrack Sign Up</title>
+
+<style>
+/* ------------------ THEME VARIABLES ------------------ */
+:root {
+    --accent: #00e6d0;
+
+    /* Light */
+    --bg-light-1: #f7fbff;
+    --bg-light-2: #eef6ff;
+    --text-light: #0d1a24;
+    --card-light: rgba(255,255,255,0.65);
+    --input-light: #fff;
+
+    /* Dark */
+    --bg-dark-1: #000;
+    --bg-dark-2: #0c0c14;
+    --text-dark: #ffffff;
+    --card-dark: rgba(255,255,255,0.08);
+    --input-dark: #333;
+}
+
+body.light-mode {
+    --bg-main-1: var(--bg-light-1);
+    --bg-main-2: var(--bg-light-2);
+    --text-main: var(--text-light);
+    --card-bg: var(--card-light);
+    --input-bg: var(--input-light);
+}
+
+body.dark-mode {
+    --bg-main-1: var(--bg-dark-1);
+    --bg-main-2: var(--bg-dark-2);
+    --text-main: var(--text-dark);
+    --card-bg: var(--card-dark);
+    --input-bg: var(--input-dark);
+}
+
+/* ------------------ BASE STYLES ------------------ */
+* {
+    margin:0; padding:0; box-sizing:border-box;
+    font-family:Poppins, sans-serif;
+    transition:0.3s ease;
+}
+
+body {
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: radial-gradient(circle at 30% 20%, #7a2ca1, var(--bg-main-1)),
+                radial-gradient(circle at 70% 80%, #1b1b56, var(--bg-main-2));
+    background-blend-mode:screen;
+    color: var(--text-main);
+}
+
+/* ------------------ TOGGLE BUTTON ------------------ */
+#themeToggle {
+    position:fixed;
+    top:16px;
+    right:16px;
+    cursor:pointer;
+    font-size:28px;
+    color: var(--text-main);
+}
+
+/* ------------------ SIGNUP CARD ------------------ */
+.card {
+    width:90%;
+    max-width:420px;
+    background: var(--card-bg);
+    backdrop-filter:blur(14px);
+    padding:30px;
+    border-radius:14px;
+    box-shadow:0 8px 25px rgba(0,0,0,0.4);
+}
+
+.card h2 {
+    text-align:center;
+    margin-bottom:20px;
+    color: var(--accent);
+}
+
+/* ------------------ INPUT FIELDS ------------------ */
+.input-box { margin-bottom:18px; position:relative; }
+.input-box label { display:block; opacity:0.85; margin-bottom:6px; }
+
+.input-box input {
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:8px;
+    font-size:15px;
+    background: var(--input-bg);
+    color:var(--text-main);
+}
+
+/* Eye icon */
+.eye-btn {
+    position:absolute;
+    right:12px;
+    top:44px;
+    cursor:pointer;
+    color:gray;
+}
+
+/* ------------------ SIGN UP BUTTON ------------------ */
+.btn {
+    width:100%;
+    padding:14px;
+    margin-top:10px;
+    border:none;
+    border-radius:8px;
+    background:var(--accent);
+    font-size:18px;
+    font-weight:600;
+    cursor:pointer;
+    color:black;
+}
+
+.login-link {
+    text-align:center;
+    margin-top:12px;
+}
+.login-link a {
+    color:#8fffee;
+    text-decoration:none;
+    font-size:14px;
+}
+</style>
+</head>
+
+<body class="dark-mode">
+
+<!-- Dark / Light Mode Toggle -->
+<div id="themeToggle" onclick="toggleTheme()">🌙</div>
+
+<div class="card">
+    <h2>Create Account</h2>
+
+    <!-- Username -->
+    <div class="input-box">
+        <label>Username</label>
+        <input type="text" id="username">
+    </div>
+
+    <!-- Email -->
+    <div class="input-box">
+        <label>Email</label>
+        <input type="email" id="email">
+    </div>
+
+    <!-- Password -->
+    <div class="input-box">
+        <label>Password</label>
+        <input type="password" id="password">
+
+        <!-- Eye Icon -->
+        <span class="eye-btn" onclick="toggleEye('password','eyeOpen1','eyeClosed1')">
+            <!-- Open Eye -->
+            <svg id="eyeOpen1" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/>
+            </svg>
+
+            <!-- Closed Eye -->
+            <svg id="eyeClosed1" style="display:none;" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 13a5 5 0 01-10 0"/>
+                <path d="M2 12s4-7 10-7 10 7 10 7"/>
+                <line x1="22" y1="2" x2="2" y2="22"/>
+            </svg>
+        </span>
+    </div>
+
+    <!-- Confirm Password -->
+    <div class="input-box">
+        <label>Confirm Password</label>
+        <input type="password" id="confirm">
+
+        <span class="eye-btn" onclick="toggleEye('confirm','eyeOpen2','eyeClosed2')">
+            <svg id="eyeOpen2" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/>
+            </svg>
+
+            <svg id="eyeClosed2" style="display:none;" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 13a5 5 0 01-10 0"/>
+                <path d="M2 12s4-7 10-7 10 7 10 7"/>
+                <line x1="22" y1="2" x2="2" y2="22"/>
+            </svg>
+        </span>
+    </div>
+
+    <button class="btn" onclick="signup()">Sign Up</button>
+
+    <div class="login-link">
+        Already have an account? <a href="signin.html">Login</a>
+    </div>
+</div>
+
+<script>
+/* ---------------- PASSWORD EYE TOGGLE ---------------- */
+function toggleEye(fieldId, openId, closeId) {
+    let field = document.getElementById(fieldId);
+    let open = document.getElementById(openId);
+    let close = document.getElementById(closeId);
+
+    if (field.type === "password") {
+        field.type = "text";
+        open.style.display = "none";
+        close.style.display = "block";
+    } else {
+        field.type = "password";
+        close.style.display = "none";
+        open.style.display = "block";
+    }
+}
+
+/* ---------------- SIGN UP LOGIC ---------------- */
+function signup() {
+    let user = document.getElementById("username").value;
+    let mail = document.getElementById("email").value;
+    let pass = document.getElementById("password").value;
+    let confirm = document.getElementById("confirm").value;
+
+    if (!user || !mail || !pass || !confirm) {
+        alert("Fill all fields!");
+        return;
+    }
+
+    if (pass !== confirm) {
+        alert("Passwords don't match!");
+        return;
+    }
+
+    alert("Account created successfully!");
+    window.location.href = "index.html";
+}
+
+/* ---------------- DARK / LIGHT MODE ---------------- */
+function toggleTheme() {
+    let body = document.body;
+    let toggle = document.getElementById("themeToggle");
+
+    if (body.classList.contains("dark-mode")) {
+        body.classList.replace("dark-mode","light-mode");
+        toggle.textContent = "☀️";
+        localStorage.setItem("theme","light");
+    } else {
+        body.classList.replace("light-mode","dark-mode");
+        toggle.textContent = "🌙";
+        localStorage.setItem("theme","dark");
+    }
+}
+
+/* Load saved theme */
+(function(){
+    let saved = localStorage.getItem("theme");
+    if (saved === "light") {
+        document.body.classList.replace("dark-mode","light-mode");
+        document.getElementById("themeToggle").textContent = "☀️";
+    }
+})();
+</script>
+
+</body>
+</html>
